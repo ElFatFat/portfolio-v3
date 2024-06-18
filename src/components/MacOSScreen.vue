@@ -1,23 +1,101 @@
 <script setup lang="ts">
 import MacOSTopbar from './MacOSTopbar.vue';
 import MacOSTaskbar from './MacOSTaskbar.vue';
-import type { DefineComponent } from 'vue';
+import { onMounted, type DefineComponent } from 'vue';
+import { type macosWindow } from '../interfaces';
 
-interface macosWindow{
-  title: string;
-  iconURL: string;
-  isMinimized: boolean;
-  isRunning: boolean;
-  content: DefineComponent;
-  position: {
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-    depth: number;
-  };
-
-}
+  const macosWindows: macosWindow[] = [
+    {
+      title: "Chrome",
+      iconURL: "/src/assets/appIcons/chrome.png",
+      isMinimized: false,
+      isRunning: true,
+      // @ts-ignore
+      content: MacOSTopbar,
+      position: {
+        x: 0,
+        y: 0,
+        width: 100,
+        height: 100,
+        depth: 0
+      }
+    },
+    {
+      title: "Chrome",
+      iconURL: "/src/assets/appIcons/chrome.png",
+      isMinimized: false,
+      isRunning: true,
+      // @ts-ignore
+      content: MacOSTopbar,
+      position: {
+        x: 0,
+        y: 0,
+        width: 100,
+        height: 100,
+        depth: 0
+      }
+    },
+    {
+      title: "Chrome",
+      iconURL: "/src/assets/appIcons/chrome.png",
+      isMinimized: false,
+      isRunning: true,
+      // @ts-ignore
+      content: MacOSTopbar,
+      position: {
+        x: 0,
+        y: 0,
+        width: 100,
+        height: 100,
+        depth: 0
+      }
+    },
+    {
+      title: "Chrome",
+      iconURL: "/src/assets/appIcons/chrome.png",
+      isMinimized: false,
+      isRunning: true,
+      // @ts-ignore
+      content: MacOSTopbar,
+      position: {
+        x: 0,
+        y: 0,
+        width: 100,
+        height: 100,
+        depth: 0
+      }
+    },
+    {
+      title: "Chrome",
+      iconURL: "/src/assets/appIcons/chrome.png",
+      isMinimized: false,
+      isRunning: true,
+      // @ts-ignore
+      content: MacOSTopbar,
+      position: {
+        x: 0,
+        y: 0,
+        width: 100,
+        height: 100,
+        depth: 0
+      }
+    },
+    {
+      title: "Chrome",
+      iconURL: "/src/assets/appIcons/chrome.png",
+      isMinimized: false,
+      isRunning: false,
+      // @ts-ignore
+      content: MacOSTopbar,
+      position: {
+        x: 0,
+        y: 0,
+        width: 100,
+        height: 100,
+        depth: 0
+      }
+    }
+  ]
 </script>
 
 <template>
@@ -25,7 +103,7 @@ interface macosWindow{
     <div class="macos-main" :style="{'background-image': 'url(/src/assets/wallpapers/01.jpeg)'}">
       <MacOSTopbar/>
       <p>Test</p>
-      <MacOSTaskbar/>
+      <MacOSTaskbar :macos-window="macosWindows"/>
     </div>
   </div>
 </template>

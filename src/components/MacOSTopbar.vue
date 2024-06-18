@@ -21,6 +21,7 @@ function capitalizeFirstLetter(string: string) {
     <div class="macos-topbar-left"></div>
     <div class="macos-topbar-right">
       <p>{{ level*100 + " %" || "100%" }}</p>
+      <p v-if="charging">Charging</p>
       <p>{{ currentTime }}</p>
       </div>
   </div>
@@ -33,6 +34,10 @@ function capitalizeFirstLetter(string: string) {
   min-height: 3%;
   display: flex;
   justify-content: space-between;
+}
+
+.macos-topbar *{
+  user-select: none;
 }
 
 .macos-topbar-left{
