@@ -40,7 +40,7 @@ const openURL = (url: string) => {
         <p class="topbar-clickable-text" @click="$emit('closeApp', macosActiveApp.title)">Fermer</p>
       </template>
       <template v-else>
-        <img src="/src/assets/appIcons/apple.png" alt="icon" class="macos-topbar-app-icon" @click="$emit('logOut')"/>
+        <img src="/public/appIcons/apple.png" alt="icon" class="macos-topbar-app-icon" @click="$emit('logOut')"/>
         <p class="macos-active-app-title">Valentin T.</p>
       </template>
     </div>

@@ -11,8 +11,10 @@ import Spotify from './windows/Spotify.vue';
 import MacOSLogin from './MacOSLogin.vue';
 
   import { ref } from 'vue';
+  import MacOSLoading from './MacOSLoading.vue';
   const maxZIndex = ref(0);
   const loggedIn = ref(false);
+  const loaded = ref(false);
 
 const activeApp = computed(() => {
   const maxDepthApp = macosWindows.value.reduce((a, b) => a.size.depth > b.size.depth ? a : b, macosWindows.value[0]);
@@ -22,7 +24,7 @@ const activeApp = computed(() => {
   const macosWindows = ref<macosWindow[]>([
     {
       title: "Chrome",
-      iconURL: "/src/assets/appIcons/chrome.png",
+      iconURL: "/public/appIcons/chrome.png",
       isMinimized: false,
       isRunning: false,
       // @ts-ignore
@@ -37,7 +39,7 @@ const activeApp = computed(() => {
     },
     {
       title: "Discord",
-      iconURL: "/src/assets/appIcons/chrome.png",
+      iconURL: "/public/appIcons/chrome.png",
       isMinimized: false,
       isRunning: false,
       // @ts-ignore
@@ -52,7 +54,7 @@ const activeApp = computed(() => {
     },
     {
       title: "Visual Studio Code",
-      iconURL: "/src/assets/appIcons/chrome.png",
+      iconURL: "/public/appIcons/chrome.png",
       isMinimized: false,
       isRunning: false,
       // @ts-ignore
@@ -67,7 +69,7 @@ const activeApp = computed(() => {
     },
     {
       title: "Postman",
-      iconURL: "/src/assets/appIcons/chrome.png",
+      iconURL: "/public/appIcons/chrome.png",
       isMinimized: false,
       isRunning: false,
       // @ts-ignore
@@ -82,7 +84,7 @@ const activeApp = computed(() => {
     },
     {
       title: "Spotify",
-      iconURL: "/src/assets/appIcons/spotify.png",
+      iconURL: "/public/appIcons/spotify.png",
       isMinimized: false,
       isRunning: false,
       // @ts-ignore
@@ -97,7 +99,7 @@ const activeApp = computed(() => {
     },
     {
       title: "Finder",
-      iconURL: "/src/assets/appIcons/chrome.png",
+      iconURL: "/public/appIcons/chrome.png",
       isMinimized: false,
       isRunning: false,
       // @ts-ignore
@@ -168,7 +170,10 @@ const activeApp = computed(() => {
 
 <template>
   <div class="macos-wrapper">
-    <Transition>
+    <Transition name="loading">
+      <MacOSLoading v-if="!loaded" @click="loaded = true"/>
+    </Transition>
+    <Transition name="login">
       <MacOSLogin v-if="!loggedIn" @login="login"/>
     </Transition>
     <div class="macos-main" :style="{'background-image': 'url(/src/assets/wallpapers/01.jpeg)'}">
@@ -181,13 +186,23 @@ const activeApp = computed(() => {
 
 <style scoped>
 
-.v-enter-active,
-.v-leave-active {
+.loading-enter-active,
+.loading-leave-active {
+  transition: all 0.1s ease;
+}
+
+.loading-enter-from,
+.loading-leave-to {
+  opacity: 0;
+}
+
+.login-enter-active,
+.login-leave-active {
   transition: all 0.5s ease;
 }
 
-.v-enter-from,
-.v-leave-to {
+.login-enter-from,
+.login-leave-to {
   opacity: 0;
   transform: scale(1.5);
 }
