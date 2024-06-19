@@ -3,8 +3,8 @@ import { ref } from 'vue';
 
 
 
-const dateOptions = { weekday: 'long', day: 'numeric', month: 'long' };
-const timeOptions = { hour: 'numeric', minute: 'numeric', hour12: false };
+const dateOptions: Intl.DateTimeFormatOptions = { weekday: 'long', day: 'numeric', month: 'long' };
+const timeOptions: Intl.DateTimeFormatOptions = { hour: 'numeric', minute: 'numeric', hour12: false };
 
 const currentDate = new Date();
 

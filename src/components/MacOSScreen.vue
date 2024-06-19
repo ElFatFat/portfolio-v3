@@ -7,7 +7,7 @@ import { type macosWindow } from '../interfaces';
 import ChromeApp from './windows/ChromeApp.vue';
 import Spotify from './windows/Spotify.vue';
 
-import MacOSLoading from './MacOSLoading.vue';
+// import MacOSLoading from './MacOSLoading.vue';
 import MacOSLogin from './MacOSLogin.vue';
 
   import { ref } from 'vue';
