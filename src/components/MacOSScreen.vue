@@ -22,7 +22,7 @@ const activeApp = computed(() => {
   const macosWindows = ref<macosWindow[]>([
     {
       title: "Chrome",
-      iconURL: "/public/appIcons/chrome.png",
+      iconURL: "/appIcons/chrome.png",
       isMinimized: false,
       isRunning: false,
       // @ts-ignore
@@ -37,7 +37,7 @@ const activeApp = computed(() => {
     },
     {
       title: "Discord",
-      iconURL: "/public/appIcons/chrome.png",
+      iconURL: "/appIcons/chrome.png",
       isMinimized: false,
       isRunning: false,
       // @ts-ignore
@@ -52,7 +52,7 @@ const activeApp = computed(() => {
     },
     {
       title: "Visual Studio Code",
-      iconURL: "/public/appIcons/chrome.png",
+      iconURL: "/appIcons/chrome.png",
       isMinimized: false,
       isRunning: false,
       // @ts-ignore
@@ -67,7 +67,7 @@ const activeApp = computed(() => {
     },
     {
       title: "Postman",
-      iconURL: "/public/appIcons/chrome.png",
+      iconURL: "/appIcons/chrome.png",
       isMinimized: false,
       isRunning: false,
       // @ts-ignore
@@ -82,7 +82,7 @@ const activeApp = computed(() => {
     },
     {
       title: "Spotify",
-      iconURL: "/public/appIcons/spotify.png",
+      iconURL: "/appIcons/spotify.png",
       isMinimized: false,
       isRunning: false,
       // @ts-ignore
@@ -97,7 +97,7 @@ const activeApp = computed(() => {
     },
     {
       title: "Finder",
-      iconURL: "/public/appIcons/chrome.png",
+      iconURL: "/appIcons/chrome.png",
       isMinimized: false,
       isRunning: false,
       // @ts-ignore
