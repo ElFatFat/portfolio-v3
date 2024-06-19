@@ -1,17 +1,15 @@
 <script setup lang="ts">
 import MacOSTopbar from './MacOSTopbar.vue';
 import MacOSTaskbar from './MacOSTaskbar.vue';
+import MacOSLoading from './MacOSLoading.vue';
 import MacOSWindowManager from './MacOSWindowManager.vue';
 import { computed, onMounted, type DefineComponent } from 'vue';
 import { type macosWindow } from '../interfaces';
 import ChromeApp from './windows/ChromeApp.vue';
 import Spotify from './windows/Spotify.vue';
-
-// import MacOSLoading from './MacOSLoading.vue';
 import MacOSLogin from './MacOSLogin.vue';
 
   import { ref } from 'vue';
-  import MacOSLoading from './MacOSLoading.vue';
   const maxZIndex = ref(0);
   const loggedIn = ref(false);
   const loaded = ref(false);
@@ -171,7 +169,7 @@ const activeApp = computed(() => {
 <template>
   <div class="macos-wrapper">
     <Transition name="loading">
-      <MacOSLoading v-if="!loaded" @click="loaded = true"/>
+      <MacOSLoading v-if="!loaded"/>
     </Transition>
     <Transition name="login">
       <MacOSLogin v-if="!loggedIn" @login="login"/>
