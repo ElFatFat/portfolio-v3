@@ -6,13 +6,13 @@ export interface macosWindow{
     isMinimized: boolean;
     isRunning: boolean;
     content: DefineComponent;
-    position: {
-      x: number;
-      y: number;
+    size: {
       minwidth: number;
       minheight: number;
       maxwidth: number;
       maxheight: number;
       depth: number;
     };
+    x: number;
+    y: number;
   }

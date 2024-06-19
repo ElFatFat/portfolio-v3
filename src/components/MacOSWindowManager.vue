@@ -16,6 +16,7 @@ const windowToShow = computed(() => {
   return props.macosWindow.filter(window => window.isRunning && !window.isMinimized);
 });
 
+
 const closeApp = (event: Event) => {
   emits('closeApp', event);
 }
@@ -33,8 +34,8 @@ const touchApp = (event: Event) => {
 <template>
   <div class="macos-window-manager">
     <TransitionGroup name="windowTransition">
-    <div v-for="window in windowToShow" :key="window.title" class="macos-window">
-        <Window :window="window" @closeApp="closeApp" @minimizeApp="minimizeApp" @touchApp="touchApp"/>
+    <div v-for="macosWindow in windowToShow" :key="macosWindow.title" class="macos-window">
+        <Window :macosWindow="macosWindow" @closeApp="closeApp" @minimizeApp="minimizeApp" @touchApp="touchApp"/>
     </div>
     </TransitionGroup>
   </div>

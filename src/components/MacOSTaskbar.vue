@@ -53,7 +53,7 @@ const props = defineProps({
 .macos-taskbar{
   user-select: none;
   width: fit-content;
-  padding: 0.2em 0.2em 0em 0.2em;
+  padding: 0.2em 0.4em 0em 0.4em;
   gap: 0.7em;
   min-width: 150px;
   height: 100%;
@@ -73,6 +73,7 @@ const props = defineProps({
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 0.1em;
   align-items: center;
   transition: all 0.2s;
 }
@@ -81,7 +82,7 @@ const props = defineProps({
   display: block;
 }
 .macos-icon{
-  height: 90%;
+  height: 80%;
   transition: all 0.1s;
 }
 

@@ -1,10 +1,17 @@
 <script setup lang="ts">
 import { useBattery, useNetwork } from '@vueuse/core'
 import { ref } from 'vue';
+import { type macosWindow } from '../interfaces';
 
 const { charging, chargingTime, dischargingTime, level } = useBattery()
 const { isOnline, offlineAt, downlink, downlinkMax, effectiveType, saveData, type } = useNetwork()
 
+const props = defineProps({
+  macosActiveApp: {
+    type: Object as () => macosWindow | null,
+    required: true
+  }
+});
 
 const options = { weekday: 'short', day: 'numeric', month: 'short', hour: 'numeric', minute: 'numeric', hour12: false };
 // @ts-ignore
@@ -18,11 +25,26 @@ function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+const openURL = (url: string) => {
+  window.open(url, '_blank');
+};
 </script>
 
 <template>
   <div class="macos-topbar glass-effect">
-    <div class="macos-topbar-left"></div>
+    <div class="macos-topbar-left">
+      <template v-if="macosActiveApp">
+        <img :src="macosActiveApp.iconURL" alt="icon" class="macos-topbar-app-icon" @click="$emit('logOut')"/>
+        <p class="macos-active-app-title">{{ macosActiveApp?.title}}</p>
+        <p class="topbar-clickable-text" @click="openURL('/' + macosActiveApp.title)">Maximiser</p>
+        <p class="topbar-clickable-text" @click="$emit('minimizeApp', macosActiveApp.title)">Minimiser</p>
+        <p class="topbar-clickable-text" @click="$emit('closeApp', macosActiveApp.title)">Fermer</p>
+      </template>
+      <template v-else>
+        <img src="/src/assets/appIcons/apple.png" alt="icon" class="macos-topbar-app-icon" @click="$emit('logOut')"/>
+        <p class="macos-active-app-title">Valentin T.</p>
+      </template>
+    </div>
     <div class="macos-topbar-right">
       <div class="battery-section">
         <p>{{ (level*100).toFixed(0) + " %" || "100%" }}</p>
@@ -41,6 +63,10 @@ function capitalizeFirstLetter(string: string) {
 </template>
 
 <style scoped>
+
+.macos-active-app-title{
+  font-family: 'SfProDisplay-Bold', sans-serif;
+}
 .macos-topbar{
   font-size: 0.9em;
   padding-inline: 1rem;
@@ -58,6 +84,8 @@ function capitalizeFirstLetter(string: string) {
   width: 50%;
   display: flex;
   justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
 }
 
 .macos-topbar-right{
@@ -79,7 +107,13 @@ function capitalizeFirstLetter(string: string) {
   height: 1em;
 }
 
-.wifiIcon{
+.wifiIcon, .macos-topbar-app-icon{
   height: 1.3em;
+  cursor: pointer;
+}
+.topbar-clickable-text{
+  cursor: pointer;
+}
+.topbar-clickable-text:active{
 }
 </style>

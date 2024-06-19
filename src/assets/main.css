@@ -49,6 +49,22 @@
   font-family: 'SfProDisplay-UltraLightItalic';
   src: url('../assets/fonts/sfpro/ULTRALIGHTITALIC.OTF');
 }
+@font-face {
+  font-family: 'SfProDisplay-Rounded-Bold';
+  src: url('../assets/fonts/sfpro/SF-Pro-Rounded-Bold.otf');
+}
+@font-face {
+  font-family: 'SfProDisplay-Rounded-Heavy';
+  src: url('../assets/fonts/sfpro/SF-Pro-Rounded-Heavy.otf');
+}
+@font-face {
+  font-family: 'SfProDisplay-Rounded-Light';
+  src: url('../assets/fonts/sfpro/SF-Pro-Rounded-Light.otf');
+}
+@font-face {
+  font-family: 'SfProDisplay-Rounded-Medium';
+  src: url('../assets/fonts/sfpro/SF-Pro-Rounded-Medium.otf');
+}
 * {
     font-family: 'SfProDisplay-Medium', sans-serif;
     font-size: 1em;

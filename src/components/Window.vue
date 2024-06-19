@@ -15,7 +15,7 @@ const hoverableButtons = ref<HTMLElement>()
 const isHovered = useElementHover(hoverableButtons)
 
 const props = defineProps({
-  window: {
+  macosWindow: {
     type: Object as () => macosWindow,
     required: true
   }
@@ -28,24 +28,24 @@ const openURL = (url: string) => {
 </script>
 
 <template>
-    <Draggable class="macos-window" ref="window" :handle="headerDrag" :prevent-default="true" :initial-value="{ x: rand(screenX*0.1, screenX*0.9), y: rand(screenY*0.1, screenY*0.9) }" :storage-key="window.title" storage-type="session" :style="{ zIndex: window.position.depth, minWidth: window.position.minwidth + 'px', minHeight: window.position.minheight  + 'px', maxWidth: window.position.maxwidth + 'px', maxHeight: window.position.maxheight  + 'px' }" @click="$emit('touchApp', window.title)" @start="$emit('touchApp', window.title)">
+    <Draggable class="macos-window" ref="window" :handle="headerDrag" :prevent-default="true" :initial-value="{ x: rand(screenX*0.1, screenX*0.9), y: rand(screenY*0.1, screenY*0.9) }" :storage-key="macosWindow.title" storage-type="session" :style="{ zIndex: macosWindow.size.depth, minWidth: macosWindow.size.minwidth + 'px', minHeight: macosWindow.size.minheight  + 'px', maxWidth: macosWindow.size.maxwidth + 'px', maxHeight: macosWindow.size.maxheight  + 'px' }" @click="$emit('touchApp', macosWindow.title)" @start="$emit('touchApp', macosWindow.title)">
         <div class="macos-window-header" ref="headerDrag">
         <div class="macos-window-header-button" ref="hoverableButtons">
-            <img src="/src/assets/windowButtons/close-hover.png" alt="close" v-if="isHovered" @click="$emit('closeApp', window.title)"/>
+            <img src="/src/assets/windowButtons/close-hover.png" alt="close" v-if="isHovered" @click="$emit('closeApp', macosWindow.title)"/>
             <img src="/src/assets/windowButtons/close-normal.png" alt="close" v-else/>
-            <img src="/src/assets/windowButtons/min-hover.png" alt="close" v-if="isHovered" @click="$emit('minimizeApp', window.title)"/>
+            <img src="/src/assets/windowButtons/min-hover.png" alt="close" v-if="isHovered" @click="$emit('minimizeApp', macosWindow.title)"/>
             <img src="/src/assets/windowButtons/min-normal.png" alt="close" v-else/>
-            <img src="/src/assets/windowButtons/max-hover.png" alt="close" v-if="isHovered" @click="openURL('/' + window.title)"/>
+            <img src="/src/assets/windowButtons/max-hover.png" alt="close" v-if="isHovered" @click="openURL('/' + macosWindow.title)"/>
             <img src="/src/assets/windowButtons/max-normal.png" alt="close" v-else/>
         </div>
         <div class="macos-window-header-title">
-          <img :src="window.iconURL" alt="icon" class="macos-icon"/>
-            <p>{{ window.title }}</p>
+          <img :src="macosWindow.iconURL" alt="icon" class="macos-icon"/>
+            <p>{{ macosWindow.title }}</p>
         </div>
         <div></div>
         </div>
         <div class="macos-window-content">
-            <window.content/>
+            <macosWindow.content/>
         </div>
     </Draggable>
 </template>

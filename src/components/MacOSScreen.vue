@@ -2,13 +2,22 @@
 import MacOSTopbar from './MacOSTopbar.vue';
 import MacOSTaskbar from './MacOSTaskbar.vue';
 import MacOSWindowManager from './MacOSWindowManager.vue';
-import { onMounted, type DefineComponent } from 'vue';
+import { computed, onMounted, type DefineComponent } from 'vue';
 import { type macosWindow } from '../interfaces';
 import ChromeApp from './windows/ChromeApp.vue';
 import Spotify from './windows/Spotify.vue';
 
+import MacOSLoading from './MacOSLoading.vue';
+import MacOSLogin from './MacOSLogin.vue';
+
   import { ref } from 'vue';
   const maxZIndex = ref(0);
+  const loggedIn = ref(false);
+
+const activeApp = computed(() => {
+  const maxDepthApp = macosWindows.value.reduce((a, b) => a.size.depth > b.size.depth ? a : b, macosWindows.value[0]);
+  return maxDepthApp.size.depth === 0 ? null : maxDepthApp;
+});
 
   const macosWindows = ref<macosWindow[]>([
     {
@@ -18,12 +27,10 @@ import Spotify from './windows/Spotify.vue';
       isRunning: false,
       // @ts-ignore
       content: ChromeApp,
-      position: {
-        x: 0,
-        y: 0,
-        minwidth: 100,
+      size: {
+        minwidth: 300,
         maxwidth: 800,
-        minheight: 100,
+        minheight: 300,
         maxheight: 800,
         depth: 0
       }
@@ -35,13 +42,11 @@ import Spotify from './windows/Spotify.vue';
       isRunning: false,
       // @ts-ignore
       content: MacOSTopbar,
-      position: {
-        x: 0,
-        y: 0,
+      size: {
         minwidth: 100,
-        maxwidth: 100,
+        maxwidth: 800,
         minheight: 100,
-        maxheight: 100,
+        maxheight: 800,
         depth: 0
       }
     },
@@ -52,13 +57,11 @@ import Spotify from './windows/Spotify.vue';
       isRunning: false,
       // @ts-ignore
       content: MacOSTopbar,
-      position: {
-        x: 0,
-        y: 0,
+      size: {
         minwidth: 100,
-        maxwidth: 100,
+        maxwidth: 800,
         minheight: 100,
-        maxheight: 100,
+        maxheight: 800,
         depth: 0
       }
     },
@@ -69,13 +72,11 @@ import Spotify from './windows/Spotify.vue';
       isRunning: false,
       // @ts-ignore
       content: MacOSTopbar,
-      position: {
-        x: 0,
-        y: 0,
+      size: {
         minwidth: 100,
-        maxwidth: 100,
+        maxwidth: 800,
         minheight: 100,
-        maxheight: 100,
+        maxheight: 800,
         depth: 0
       }
     },
@@ -86,9 +87,7 @@ import Spotify from './windows/Spotify.vue';
       isRunning: false,
       // @ts-ignore
       content: Spotify,
-      position: {
-        x: 0,
-        y: 0,
+      size: {
         minwidth: 500,
         maxwidth: 1000,
         minheight: 100,
@@ -103,13 +102,11 @@ import Spotify from './windows/Spotify.vue';
       isRunning: false,
       // @ts-ignore
       content: MacOSTopbar,
-      position: {
-        x: 0,
-        y: 0,
+      size: {
         minwidth: 100,
-        maxwidth: 100,
+        maxwidth: 800,
         minheight: 100,
-        maxheight: 100,
+        maxheight: 800,
         depth: 0
       }
     }
@@ -123,8 +120,8 @@ import Spotify from './windows/Spotify.vue';
           window.isRunning = true;
         }
         window.isMinimized = false;
-        window.position.depth = maxZIndex.value + 1;
-        maxZIndex.value = window.position.depth;
+        window.size.depth = maxZIndex.value + 1;
+        maxZIndex.value = window.size.depth;
       }
     });
   }
@@ -135,6 +132,7 @@ import Spotify from './windows/Spotify.vue';
       if(window.title === event){
         window.isRunning = false;
         window.isMinimized = false;
+        window.size.depth = 0;
       }
     });
   }
@@ -144,6 +142,7 @@ import Spotify from './windows/Spotify.vue';
       // @ts-ignore
       if(window.title === event){
         window.isMinimized = true;
+        window.size.depth = 0;
       }
     });
   }
@@ -152,18 +151,28 @@ import Spotify from './windows/Spotify.vue';
     macosWindows.value.forEach(window => {
       // @ts-ignore
       if(window.title === event){
-        window.position.depth = maxZIndex.value + 1;
-        maxZIndex.value = window.position.depth;
+        window.size.depth = maxZIndex.value + 1;
+        maxZIndex.value = window.size.depth;
       }
     });
   }
   
+  function login(){
+    loggedIn.value = true;
+  }
+
+  const logOut = () => {
+    loggedIn.value = false;
+  }
 </script>
 
 <template>
   <div class="macos-wrapper">
+    <Transition>
+      <MacOSLogin v-if="!loggedIn" @login="login"/>
+    </Transition>
     <div class="macos-main" :style="{'background-image': 'url(/src/assets/wallpapers/01.jpeg)'}">
-      <MacOSTopbar/>
+      <MacOSTopbar :macos-active-app="activeApp" @close-app="closeApp" @minimize-app="minimizeApp" @logOut="logOut"/>
       <MacOSWindowManager :macos-window="macosWindows" @close-app="closeApp" @minimize-app="minimizeApp" @touch-app="touchApp"/>
       <MacOSTaskbar :macos-window="macosWindows" @openApp="openApp"/>
     </div>
@@ -171,6 +180,18 @@ import Spotify from './windows/Spotify.vue';
 </template>
 
 <style scoped>
+
+.v-enter-active,
+.v-leave-active {
+  transition: all 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+  transform: scale(1.5);
+}
+
 .macos-wrapper{
   height: 100vh;
   width: 100vw;
@@ -196,7 +217,7 @@ import Spotify from './windows/Spotify.vue';
   object-fit: contain;
 
   background-size: cover;
-  background-position: center;
+  background-size: center;
   background-repeat: no-repeat;
 }
 </style>
