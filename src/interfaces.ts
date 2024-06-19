@@ -9,8 +9,10 @@ export interface macosWindow{
     position: {
       x: number;
       y: number;
-      width: number;
-      height: number;
+      minwidth: number;
+      minheight: number;
+      maxwidth: number;
+      maxheight: number;
       depth: number;
     };
   }

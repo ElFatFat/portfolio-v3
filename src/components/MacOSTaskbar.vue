@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 import { type macosWindow } from '../interfaces';
+ 
+
 
 const props = defineProps({
   macosWindow: {
@@ -12,7 +14,8 @@ const props = defineProps({
 
 <template>
   <div class="macos-taskbar glass-effect-darker">
-    <div v-for="window in macosWindow" :key="window.title" class="macos-app" @click="$emit('openApp', window.title)">
+    <div v-for="window in macosWindow" :key="window.title" class="macos-app" ref="macosAppRef" @click="$emit('openApp', window.title)">
+      <div id="tooltip" ref="floating">{{ window.title }}</div>
       <img :src="window.iconURL" alt="icon" class="macos-icon"/>
       <div v-if="window.isRunning" class="macos-activity running"></div>
       <div v-else class="macos-activity"></div>
@@ -22,6 +25,31 @@ const props = defineProps({
 </template>
 
 <style scoped>
+
+#tooltip {
+  display: none;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+  padding: 0.1em 0.5em;
+  width: max-content;
+  position: absolute;
+  top: -70%;
+  left: calc(width/2);
+  font-size: 0.8em;
+  border-radius: 4px;
+}
+#tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%; /* Position the arrow just below the tooltip */
+  left: 50%;
+  margin-left: -5px; /* Center the arrow */
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.25) transparent transparent transparent;
+  /* Arrow points upwards */
+}
 .macos-taskbar{
   user-select: none;
   width: fit-content;
@@ -47,8 +75,10 @@ const props = defineProps({
   justify-content: center;
   align-items: center;
   transition: all 0.2s;
+}
 
-
+.macos-app:hover #tooltip{
+  display: block;
 }
 .macos-icon{
   height: 90%;

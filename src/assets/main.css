@@ -21,7 +21,35 @@
     font-family: 'SfProDisplay-Bold';
     src: url('../assets/fonts/sfpro/BOLD.OTF');
 }
+@font-face {
+  font-family: 'SfProDisplay-BlackItalic';
+  src: url('../assets/fonts/sfpro/BLACKITALIC.OTF');
+}
+@font-face {
+  font-family: 'SfProDisplay-HeavyItalic';
+  src: url('../assets/fonts/sfpro/HEAVYITALIC.OTF');
+}
+@font-face {
+  font-family: 'SfProDisplay-LightItalic';
+  src: url('../assets/fonts/sfpro/LIGHTITALIC.OTF');
+}
+@font-face {
+  font-family: 'SfProDisplay-Medium';
+  src: url('../assets/fonts/sfpro/MEDIUM.OTF');
+}
+@font-face {
+  font-family: 'SfProDisplay-SemiBoldItalic';
+  src: url('../assets/fonts/sfpro/SEMIBOLDITALIC.OTF');
+}
+@font-face {
+  font-family: 'SfProDisplay-ThinItalic';
+  src: url('../assets/fonts/sfpro/THINITALIC.OTF');
+}
+@font-face {
+  font-family: 'SfProDisplay-UltraLightItalic';
+  src: url('../assets/fonts/sfpro/ULTRALIGHTITALIC.OTF');
+}
 * {
-    font-family: 'SfProDisplay-Regular', sans-serif;
+    font-family: 'SfProDisplay-Medium', sans-serif;
     font-size: 1em;
 }

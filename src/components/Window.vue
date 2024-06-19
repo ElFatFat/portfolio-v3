@@ -21,17 +21,21 @@ const props = defineProps({
   }
 });
 
+const openURL = (url: string) => {
+  window.open(url, '_blank');
+};
+
 </script>
 
 <template>
-    <Draggable class="macos-window" ref="window" :handle="headerDrag" :prevent-default="true" :initial-value="{ x: rand(screenX*0.1, screenX*0.9), y: rand(screenY*0.1, screenY*0.9) }" :storage-key="window.title" storage-type="session" :style="{ zIndex: window.position.depth }" @click="$emit('touchApp', window.title)" @start="$emit('touchApp', window.title)">
+    <Draggable class="macos-window" ref="window" :handle="headerDrag" :prevent-default="true" :initial-value="{ x: rand(screenX*0.1, screenX*0.9), y: rand(screenY*0.1, screenY*0.9) }" :storage-key="window.title" storage-type="session" :style="{ zIndex: window.position.depth, minWidth: window.position.minwidth + 'px', minHeight: window.position.minheight  + 'px', maxWidth: window.position.maxwidth + 'px', maxHeight: window.position.maxheight  + 'px' }" @click="$emit('touchApp', window.title)" @start="$emit('touchApp', window.title)">
         <div class="macos-window-header" ref="headerDrag">
         <div class="macos-window-header-button" ref="hoverableButtons">
             <img src="/src/assets/windowButtons/close-hover.png" alt="close" v-if="isHovered" @click="$emit('closeApp', window.title)"/>
             <img src="/src/assets/windowButtons/close-normal.png" alt="close" v-else/>
             <img src="/src/assets/windowButtons/min-hover.png" alt="close" v-if="isHovered" @click="$emit('minimizeApp', window.title)"/>
             <img src="/src/assets/windowButtons/min-normal.png" alt="close" v-else/>
-            <img src="/src/assets/windowButtons/max-hover.png" alt="close" v-if="isHovered"/>
+            <img src="/src/assets/windowButtons/max-hover.png" alt="close" v-if="isHovered" @click="openURL('/' + window.title)"/>
             <img src="/src/assets/windowButtons/max-normal.png" alt="close" v-else/>
         </div>
         <div class="macos-window-header-title">
@@ -49,7 +53,7 @@ const props = defineProps({
 <style scoped>
 
 .macos-window {
-  min-width: fit-content;
+  user-select: none;
   min-height: 50px;
     position: fixed;
     border-radius: 10px;
@@ -84,7 +88,9 @@ const props = defineProps({
     object-fit: cover;
     cursor: pointer;
 }
-
+.macos-window-content{
+    overflow: auto;
+}
 
 .macos-window-header-button img:active{
     filter: brightness(0.8);

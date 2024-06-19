@@ -4,6 +4,8 @@ import MacOSTaskbar from './MacOSTaskbar.vue';
 import MacOSWindowManager from './MacOSWindowManager.vue';
 import { onMounted, type DefineComponent } from 'vue';
 import { type macosWindow } from '../interfaces';
+import ChromeApp from './windows/ChromeApp.vue';
+import Spotify from './windows/Spotify.vue';
 
   import { ref } from 'vue';
   const maxZIndex = ref(0);
@@ -15,12 +17,14 @@ import { type macosWindow } from '../interfaces';
       isMinimized: false,
       isRunning: false,
       // @ts-ignore
-      content: MacOSTopbar,
+      content: ChromeApp,
       position: {
         x: 0,
         y: 0,
-        width: 100,
-        height: 100,
+        minwidth: 100,
+        maxwidth: 800,
+        minheight: 100,
+        maxheight: 800,
         depth: 0
       }
     },
@@ -34,8 +38,10 @@ import { type macosWindow } from '../interfaces';
       position: {
         x: 0,
         y: 0,
-        width: 100,
-        height: 100,
+        minwidth: 100,
+        maxwidth: 100,
+        minheight: 100,
+        maxheight: 100,
         depth: 0
       }
     },
@@ -49,8 +55,10 @@ import { type macosWindow } from '../interfaces';
       position: {
         x: 0,
         y: 0,
-        width: 100,
-        height: 100,
+        minwidth: 100,
+        maxwidth: 100,
+        minheight: 100,
+        maxheight: 100,
         depth: 0
       }
     },
@@ -64,23 +72,27 @@ import { type macosWindow } from '../interfaces';
       position: {
         x: 0,
         y: 0,
-        width: 100,
-        height: 100,
+        minwidth: 100,
+        maxwidth: 100,
+        minheight: 100,
+        maxheight: 100,
         depth: 0
       }
     },
     {
       title: "Spotify",
-      iconURL: "/src/assets/appIcons/chrome.png",
+      iconURL: "/src/assets/appIcons/spotify.png",
       isMinimized: false,
       isRunning: false,
       // @ts-ignore
-      content: MacOSTopbar,
+      content: Spotify,
       position: {
         x: 0,
         y: 0,
-        width: 100,
-        height: 100,
+        minwidth: 500,
+        maxwidth: 1000,
+        minheight: 100,
+        maxheight: 500,
         depth: 0
       }
     },
@@ -94,8 +106,10 @@ import { type macosWindow } from '../interfaces';
       position: {
         x: 0,
         y: 0,
-        width: 100,
-        height: 100,
+        minwidth: 100,
+        maxwidth: 100,
+        minheight: 100,
+        maxheight: 100,
         depth: 0
       }
     }
@@ -109,6 +123,8 @@ import { type macosWindow } from '../interfaces';
           window.isRunning = true;
         }
         window.isMinimized = false;
+        window.position.depth = maxZIndex.value + 1;
+        maxZIndex.value = window.position.depth;
       }
     });
   }

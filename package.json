@@ -11,6 +11,7 @@
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
+    "@floating-ui/vue": "^1.0.6",
     "@vueuse/components": "^10.11.0",
     "@vueuse/core": "^10.11.0",
     "vue": "^3.4.21",

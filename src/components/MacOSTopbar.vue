@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { useBattery } from '@vueuse/core'
+import { useBattery, useNetwork } from '@vueuse/core'
 import { ref } from 'vue';
 
 const { charging, chargingTime, dischargingTime, level } = useBattery()
+const { isOnline, offlineAt, downlink, downlinkMax, effectiveType, saveData, type } = useNetwork()
+
 
 const options = { weekday: 'short', day: 'numeric', month: 'short', hour: 'numeric', minute: 'numeric', hour12: false };
 // @ts-ignore
@@ -22,8 +24,17 @@ function capitalizeFirstLetter(string: string) {
   <div class="macos-topbar glass-effect">
     <div class="macos-topbar-left"></div>
     <div class="macos-topbar-right">
-      <p>{{ (level*100).toFixed(0) + " %" || "100%" }}</p>
-      <p v-if="charging">Charging</p>
+      <div class="battery-section">
+        <p>{{ (level*100).toFixed(0) + " %" || "100%" }}</p>
+        <img v-if="level >= 0.80 && !charging" class="batteryIcon" src="/src/assets/batteryIcons/full-battery.png" alt="battery"/>
+        <img v-else-if="level >= 0.80 && charging" class="batteryIcon" src="/src/assets/batteryIcons/full-battery-charging.png" alt="battery"/>
+        <img v-else-if="level < 0.80 && level > 0.20 && !charging" class="batteryIcon" src="/src/assets/batteryIcons/half-battery.png" alt="battery"/>
+        <img v-else-if="level < 0.80 && level > 0.20 && charging" class="batteryIcon" src="/src/assets/batteryIcons/half-battery-charging.png" alt="battery"/>
+        <img v-else-if="level <= 0.20 && !charging" class="batteryIcon" src="/src/assets/batteryIcons/low-battery.png" alt="battery"/>
+        <img v-else-if="level <= 0.20 && charging" class="batteryIcon" src="/src/assets/batteryIcons/low-battery-charging.png" alt="battery"/>
+      </div>
+      <img v-if="isOnline" class="wifiIcon" src="/src/assets/wifiIcons/wifi-connected.png" alt="network"/>
+      <img v-else class="wifiIcon" src="/src/assets/wifiIcons/wifi-disconnected.png" alt="network"/>
       <p>{{ currentTime }}</p>
       </div>
   </div>
@@ -31,6 +42,7 @@ function capitalizeFirstLetter(string: string) {
 
 <style scoped>
 .macos-topbar{
+  font-size: 0.9em;
   padding-inline: 1rem;
   width: 100%;
   min-height: 3%;
@@ -49,9 +61,25 @@ function capitalizeFirstLetter(string: string) {
 }
 
 .macos-topbar-right{
+  height: 100%;
   gap: 1rem;
   width: 50%;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+}
+.battery-section{
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+}
+.batteryIcon{
+  height: 1em;
+}
+
+.wifiIcon{
+  height: 1.3em;
 }
 </style>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { type macosWindow } from '../interfaces';
 import Window from './Window.vue';
   
@@ -27,6 +27,7 @@ const minimizeApp = (event: Event) => {
 const touchApp = (event: Event) => {
   emits('touchApp', event);
 }
+
 </script>
 
 <template>
