@@ -5,8 +5,10 @@ import { ref } from 'vue';
 const { charging, chargingTime, dischargingTime, level } = useBattery()
 
 const options = { weekday: 'short', day: 'numeric', month: 'short', hour: 'numeric', minute: 'numeric', hour12: false };
+// @ts-ignore
 const currentTime = ref(capitalizeFirstLetter(new Intl.DateTimeFormat('fr-FR', options).format(new Date()).replace(',', ' à' )));
 setInterval(() => {
+  // @ts-ignore
   currentTime.value = capitalizeFirstLetter(new Intl.DateTimeFormat('fr-FR', options).format(new Date()).replace(',', ' à '));
 }, 1000);
 
@@ -20,7 +22,7 @@ function capitalizeFirstLetter(string: string) {
   <div class="macos-topbar glass-effect">
     <div class="macos-topbar-left"></div>
     <div class="macos-topbar-right">
-      <p>{{ level*100 + " %" || "100%" }}</p>
+      <p>{{ (level*100).toFixed(0) + " %" || "100%" }}</p>
       <p v-if="charging">Charging</p>
       <p>{{ currentTime }}</p>
       </div>

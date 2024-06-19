@@ -1,85 +1,14 @@
 <script setup lang="ts">
 import MacOSTopbar from './MacOSTopbar.vue';
 import MacOSTaskbar from './MacOSTaskbar.vue';
+import MacOSWindowManager from './MacOSWindowManager.vue';
 import { onMounted, type DefineComponent } from 'vue';
 import { type macosWindow } from '../interfaces';
 
-  const macosWindows: macosWindow[] = [
-    {
-      title: "Chrome",
-      iconURL: "/src/assets/appIcons/chrome.png",
-      isMinimized: false,
-      isRunning: true,
-      // @ts-ignore
-      content: MacOSTopbar,
-      position: {
-        x: 0,
-        y: 0,
-        width: 100,
-        height: 100,
-        depth: 0
-      }
-    },
-    {
-      title: "Chrome",
-      iconURL: "/src/assets/appIcons/chrome.png",
-      isMinimized: false,
-      isRunning: true,
-      // @ts-ignore
-      content: MacOSTopbar,
-      position: {
-        x: 0,
-        y: 0,
-        width: 100,
-        height: 100,
-        depth: 0
-      }
-    },
-    {
-      title: "Chrome",
-      iconURL: "/src/assets/appIcons/chrome.png",
-      isMinimized: false,
-      isRunning: true,
-      // @ts-ignore
-      content: MacOSTopbar,
-      position: {
-        x: 0,
-        y: 0,
-        width: 100,
-        height: 100,
-        depth: 0
-      }
-    },
-    {
-      title: "Chrome",
-      iconURL: "/src/assets/appIcons/chrome.png",
-      isMinimized: false,
-      isRunning: true,
-      // @ts-ignore
-      content: MacOSTopbar,
-      position: {
-        x: 0,
-        y: 0,
-        width: 100,
-        height: 100,
-        depth: 0
-      }
-    },
-    {
-      title: "Chrome",
-      iconURL: "/src/assets/appIcons/chrome.png",
-      isMinimized: false,
-      isRunning: true,
-      // @ts-ignore
-      content: MacOSTopbar,
-      position: {
-        x: 0,
-        y: 0,
-        width: 100,
-        height: 100,
-        depth: 0
-      }
-    },
+  import { ref } from 'vue';
+  const maxZIndex = ref(0);
+
+  const macosWindows = ref<macosWindow[]>([
     {
       title: "Chrome",
       iconURL: "/src/assets/appIcons/chrome.png",
@@ -94,16 +23,138 @@ import { type macosWindow } from '../interfaces';
         height: 100,
         depth: 0
       }
+    },
+    {
+      title: "Discord",
+      iconURL: "/src/assets/appIcons/chrome.png",
+      isMinimized: false,
+      isRunning: false,
+      // @ts-ignore
+      content: MacOSTopbar,
+      position: {
+        x: 0,
+        y: 0,
+        width: 100,
+        height: 100,
+        depth: 0
+      }
+    },
+    {
+      title: "Visual Studio Code",
+      iconURL: "/src/assets/appIcons/chrome.png",
+      isMinimized: false,
+      isRunning: false,
+      // @ts-ignore
+      content: MacOSTopbar,
+      position: {
+        x: 0,
+        y: 0,
+        width: 100,
+        height: 100,
+        depth: 0
+      }
+    },
+    {
+      title: "Postman",
+      iconURL: "/src/assets/appIcons/chrome.png",
+      isMinimized: false,
+      isRunning: false,
+      // @ts-ignore
+      content: MacOSTopbar,
+      position: {
+        x: 0,
+        y: 0,
+        width: 100,
+        height: 100,
+        depth: 0
+      }
+    },
+    {
+      title: "Spotify",
+      iconURL: "/src/assets/appIcons/chrome.png",
+      isMinimized: false,
+      isRunning: false,
+      // @ts-ignore
+      content: MacOSTopbar,
+      position: {
+        x: 0,
+        y: 0,
+        width: 100,
+        height: 100,
+        depth: 0
+      }
+    },
+    {
+      title: "Finder",
+      iconURL: "/src/assets/appIcons/chrome.png",
+      isMinimized: false,
+      isRunning: false,
+      // @ts-ignore
+      content: MacOSTopbar,
+      position: {
+        x: 0,
+        y: 0,
+        width: 100,
+        height: 100,
+        depth: 0
+      }
     }
-  ]
+  ]);
+
+  const openApp = (event: Event) => {
+    console.log(event);
+    macosWindows.value.forEach(window => {
+      // @ts-ignore
+      if(window.title === event){
+        if(!window.isRunning){
+          window.isRunning = true;
+        }
+        window.isMinimized = false;
+      }
+    });
+  }
+
+  const closeApp = (event: Event) => {
+    console.log(event);
+    macosWindows.value.forEach(window => {
+      // @ts-ignore
+      if(window.title === event){
+        window.isRunning = false;
+        window.isMinimized = false;
+      }
+    });
+  }
+
+  const minimizeApp = (event: Event) => {
+    console.log(event);
+    macosWindows.value.forEach(window => {
+      // @ts-ignore
+      if(window.title === event){
+        window.isMinimized = true;
+      }
+    });
+  }
+
+  const touchApp = (event: Event) => {
+    console.log(event);
+    macosWindows.value.forEach(window => {
+      // @ts-ignore
+      if(window.title === event){
+        window.position.depth = maxZIndex.value + 1;
+        maxZIndex.value = window.position.depth;
+        console.log(maxZIndex.value);
+      }
+    });
+  }
+  
 </script>
 
 <template>
   <div class="macos-wrapper">
     <div class="macos-main" :style="{'background-image': 'url(/src/assets/wallpapers/01.jpeg)'}">
       <MacOSTopbar/>
-      <p>Test</p>
-      <MacOSTaskbar :macos-window="macosWindows"/>
+      <MacOSWindowManager :macos-window="macosWindows" @close-app="closeApp" @minimize-app="minimizeApp" @touch-app="touchApp"/>
+      <MacOSTaskbar :macos-window="macosWindows" @openApp="openApp"/>
     </div>
   </div>
 </template>

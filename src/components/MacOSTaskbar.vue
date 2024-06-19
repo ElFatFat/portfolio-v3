@@ -12,7 +12,7 @@ const props = defineProps({
 
 <template>
   <div class="macos-taskbar glass-effect-darker">
-    <div v-for="window in macosWindow" :key="window.title" class="macos-app">
+    <div v-for="window in macosWindow" :key="window.title" class="macos-app" @click="$emit('openApp', window.title)">
       <img :src="window.iconURL" alt="icon" class="macos-icon"/>
       <div v-if="window.isRunning" class="macos-activity running"></div>
       <div v-else class="macos-activity"></div>
@@ -23,6 +23,7 @@ const props = defineProps({
 
 <style scoped>
 .macos-taskbar{
+  user-select: none;
   width: fit-content;
   padding: 0.2em 0.2em 0em 0.2em;
   gap: 0.7em;
