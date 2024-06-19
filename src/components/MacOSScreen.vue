@@ -102,7 +102,6 @@ import { type macosWindow } from '../interfaces';
   ]);
 
   const openApp = (event: Event) => {
-    console.log(event);
     macosWindows.value.forEach(window => {
       // @ts-ignore
       if(window.title === event){
@@ -115,7 +114,6 @@ import { type macosWindow } from '../interfaces';
   }
 
   const closeApp = (event: Event) => {
-    console.log(event);
     macosWindows.value.forEach(window => {
       // @ts-ignore
       if(window.title === event){
@@ -126,7 +124,6 @@ import { type macosWindow } from '../interfaces';
   }
 
   const minimizeApp = (event: Event) => {
-    console.log(event);
     macosWindows.value.forEach(window => {
       // @ts-ignore
       if(window.title === event){
@@ -136,13 +133,11 @@ import { type macosWindow } from '../interfaces';
   }
 
   const touchApp = (event: Event) => {
-    console.log(event);
     macosWindows.value.forEach(window => {
       // @ts-ignore
       if(window.title === event){
         window.position.depth = maxZIndex.value + 1;
         maxZIndex.value = window.position.depth;
-        console.log(maxZIndex.value);
       }
     });
   }
