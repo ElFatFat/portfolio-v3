@@ -12,9 +12,9 @@ const { isFullscreen, enter, exit, toggle } = useFullscreen(macosscreen)
 <template>
   <main ref="macosscreen">
     <MacOSScreen/>
-    <button @click="toggle" class="fullscreen-button">
+    <!-- <button @click="toggle" class="fullscreen-button">
       {{ isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen' }}
-    </button>
+    </button> -->
   </main>
 </template>
 

@@ -32,7 +32,6 @@ function preloadAssets() {
 onMounted(() => {
     preloadAssets();
 });
-
 </script>
 
 <template>
@@ -50,11 +49,8 @@ onMounted(() => {
 <style scoped>
 .macos-loading{
   user-select: none;
-  max-height: 56.25vw;
-  max-width: 100%;
-  height: 100%;
+  height: 100dvh;
   width: 100%;
-  aspect-ratio: 16/9;
   z-index: 11;
   position: absolute;
   display: flex;
@@ -82,5 +78,6 @@ onMounted(() => {
 }
 .macos-topbar-app-icon{
     height: 8em;
+    max-height: 5vh;
 }
 </style>

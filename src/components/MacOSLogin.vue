@@ -43,6 +43,7 @@ function capitalizeFirstLetter(string: string) {
 .user-icon{
   border-radius: 50%;
   animation: rotateImage 5s linear infinite;
+  width: clamp(5em, 15vw, 15em);
 }
 @keyframes rotateImage {
   from {
@@ -54,9 +55,7 @@ function capitalizeFirstLetter(string: string) {
 }
 .macos-login{
   user-select: none;
-  max-height: 56.25vw;
-  max-width: 100%;
-  height: 100%;
+  height: 100dvh;
   width: 100%;
   aspect-ratio: 16/9;
   backdrop-filter: blur(10px);
@@ -64,7 +63,7 @@ function capitalizeFirstLetter(string: string) {
   position: absolute;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   background-color: rgba(255, 255, 255, 0.1);
 }
@@ -81,11 +80,13 @@ function capitalizeFirstLetter(string: string) {
     font-family: 'SfProDisplay-Rounded-Medium';
 
     font-size: 2rem;
+    font-size: clamp(1em, 2.5vw, 9em);
+
   }
 
   .macos-login-time{
     font-family: 'SfProDisplay-Rounded-Bold';
     line-height: 1em;
-    font-size: 9rem;
+    font-size: clamp(5em, 10vw, 9em);
   }
 </style>

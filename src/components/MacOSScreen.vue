@@ -206,10 +206,8 @@ const activeApp = computed(() => {
 }
 
 .macos-wrapper{
-  height: 100vh;
+  height: 100dvh;
   width: 100vw;
-  max-height: 100vh;
-  max-width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -217,7 +215,6 @@ const activeApp = computed(() => {
   background-color: black;
 }
 .macos-main {
-  aspect-ratio: 16/9;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -225,8 +222,6 @@ const activeApp = computed(() => {
   color: black;
   height: 100%;
   width: 100%;
-  max-height: 56.25vw;
-  max-width: 100%;
   object-fit: contain;
 
   background-size: cover;
