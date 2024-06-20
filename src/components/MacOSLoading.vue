@@ -37,7 +37,7 @@ onMounted(() => {
 
 <template>
     <div class="macos-loading">
-        <img src="/appIcons/apple-white.png" alt="icon" class="macos-topbar-app-icon" @click="$emit('logOut')"/>
+        <img src="/appIcons/apple-white.png" alt="icon" class="macos-topbar-app-icon" @click="$emit('loaded')"/>
         <div class="macos-slider-wrapper">
             <div class="macos-slider-inner" :style="{width: progress + '%'}">
 
