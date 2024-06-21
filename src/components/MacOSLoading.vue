@@ -7,6 +7,12 @@ const emits = defineEmits(['loaded']);
         "/appIcons/chrome.png",
         "/appIcons/spotify.png",
         "/wallpapers/01.jpeg",
+        "/windowButtons/close-hover.png",
+        "/windowButtons/close-normal.png",
+        "/windowButtons/max-hover.png",
+        "/windowButtons/max-normal.png",
+        "/windowButtons/min-hover.png",
+        "/windowButtons/min-normal.png",
     ];
     const loadedAssets = ref(0);
     const totalAssets = ref(assets.length);

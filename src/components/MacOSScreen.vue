@@ -31,9 +31,11 @@ const activeApp = computed(() => {
         minwidth: 300,
         maxwidth: 800,
         minheight: 300,
-        maxheight: 800,
+        maxheight: 600,
         depth: 0
-      }
+      },
+      backgroundColor: '#2f2a85',
+      headerTextColor: 'white'
     },
     {
       title: "Discord",
@@ -93,7 +95,8 @@ const activeApp = computed(() => {
         minheight: 100,
         maxheight: 500,
         depth: 0
-      }
+      },
+      backgroundColor: "#1DB954"
     },
     {
       title: "Finder",
@@ -222,6 +225,7 @@ const activeApp = computed(() => {
   color: black;
   height: 100%;
   width: 100%;
+  max-width: 100vw;
   object-fit: contain;
 
   background-size: cover;

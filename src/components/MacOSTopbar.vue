@@ -40,7 +40,7 @@ const openURL = (url: string) => {
         <p class="topbar-clickable-text" @click="$emit('closeApp', macosActiveApp.title)">Fermer</p>
       </template>
       <template v-else>
-        <img src="/public/appIcons/apple.png" alt="icon" class="macos-topbar-app-icon" @click="$emit('logOut')"/>
+        <img src="/appIcons/apple.png" alt="icon" class="macos-topbar-app-icon" @click="$emit('logOut')"/>
         <p class="macos-active-app-title">Valentin T.</p>
       </template>
     </div>
@@ -56,13 +56,18 @@ const openURL = (url: string) => {
       </div>
       <img v-if="isOnline" class="wifiIcon" src="/src/assets/wifiIcons/wifi-connected.png" alt="network"/>
       <img v-else class="wifiIcon" src="/src/assets/wifiIcons/wifi-disconnected.png" alt="network"/>
-      <p>{{ currentTime }}</p>
+      <p class="date">{{ currentTime }}</p>
       </div>
   </div>
 </template>
 
 <style scoped>
-
+.macos-topbar p {
+  font-size: clamp(0.6rem, 1.3vw, 1.15em);
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
 .macos-active-app-title{
   font-family: 'SfProDisplay-Bold', sans-serif;
 }
@@ -70,9 +75,10 @@ const openURL = (url: string) => {
   font-size: 0.9em;
   padding-inline: 1rem;
   width: 100%;
+  max-width: 100vw;
   min-height: 3%;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .macos-topbar *{
@@ -80,20 +86,24 @@ const openURL = (url: string) => {
 }
 
 .macos-topbar-left{
-  width: 50%;
+  max-width: 50vw;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 1rem;
+  gap: clamp(0.5rem, 2vw, 1rem);
+  height: 100%;
+  width: 100%;
 }
 
 .macos-topbar-right{
+  max-width: 50vw;
+  width: 100%;
   height: 100%;
-  gap: 1rem;
-  width: 50%;
+  gap: clamp(0.5rem, 2vw, 1rem);
   display: flex;
   justify-content: flex-end;
   align-items: center;
+
 }
 .battery-section{
   display: flex;
@@ -112,7 +122,5 @@ const openURL = (url: string) => {
 }
 .topbar-clickable-text{
   cursor: pointer;
-}
-.topbar-clickable-text:active{
 }
 </style>

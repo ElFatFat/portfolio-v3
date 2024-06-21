@@ -15,4 +15,6 @@ export interface macosWindow{
     };
     x: number;
     y: number;
+    backgroundColor?: string;
+    headerTextColor?: string;
   }

@@ -29,22 +29,22 @@ const openURL = (url: string) => {
 
 <template>
     <Draggable class="macos-window" ref="window" :handle="headerDrag" :prevent-default="true" :initial-value="{ x: rand(screenX*0.1, screenX*0.9), y: rand(screenY*0.1, screenY*0.9) }" :storage-key="macosWindow.title" storage-type="session" :style="{ zIndex: macosWindow.size.depth, minWidth: macosWindow.size.minwidth + 'px', minHeight: macosWindow.size.minheight  + 'px', maxWidth: macosWindow.size.maxwidth + 'px', maxHeight: macosWindow.size.maxheight  + 'px' }" @click="$emit('touchApp', macosWindow.title)" @start="$emit('touchApp', macosWindow.title)">
-        <div class="macos-window-header" ref="headerDrag">
+        <div class="macos-window-header" ref="headerDrag" :style="{ backgroundColor: macosWindow.backgroundColor ||  '#b8b8b8' }">
         <div class="macos-window-header-button" ref="hoverableButtons">
-            <img src="/src/assets/windowButtons/close-hover.png" alt="close" v-if="isHovered" @click="$emit('closeApp', macosWindow.title)"/>
-            <img src="/src/assets/windowButtons/close-normal.png" alt="close" v-else/>
-            <img src="/src/assets/windowButtons/min-hover.png" alt="close" v-if="isHovered" @click="$emit('minimizeApp', macosWindow.title)"/>
-            <img src="/src/assets/windowButtons/min-normal.png" alt="close" v-else/>
-            <img src="/src/assets/windowButtons/max-hover.png" alt="close" v-if="isHovered" @click="openURL('/' + macosWindow.title)"/>
-            <img src="/src/assets/windowButtons/max-normal.png" alt="close" v-else/>
+            <img src="/windowButtons/close-hover.png" alt="close" v-if="isHovered" @click="$emit('closeApp', macosWindow.title)"/>
+            <img src="/windowButtons/close-normal.png" alt="close" v-else/>
+            <img src="/windowButtons/min-hover.png" alt="close" v-if="isHovered" @click="$emit('minimizeApp', macosWindow.title)"/>
+            <img src="/windowButtons/min-normal.png" alt="close" v-else/>
+            <img src="/windowButtons/max-hover.png" alt="close" v-if="isHovered" @click="openURL('/' + macosWindow.title)"/>
+            <img src="/windowButtons/max-normal.png" alt="close" v-else/>
         </div>
-        <div class="macos-window-header-title">
+        <div class="macos-window-header-title" :style="{ color: macosWindow.headerTextColor ||  'black' }">
           <img :src="macosWindow.iconURL" alt="icon" class="macos-icon"/>
             <p>{{ macosWindow.title }}</p>
         </div>
         <div></div>
         </div>
-        <div class="macos-window-content">
+        <div class="macos-window-content" :style="{ backgroundColor: macosWindow.backgroundColor}">
             <macosWindow.content/>
         </div>
     </Draggable>
@@ -71,7 +71,7 @@ const openURL = (url: string) => {
     grid-template-columns: 1fr 1fr 1fr;
     justify-content: center;
     align-items: center;
-    background-color: rgb(168, 168, 168);
+    background-color: #b8b8b8;
 }
 .macos-window-header-button{
     width: fit-content;
