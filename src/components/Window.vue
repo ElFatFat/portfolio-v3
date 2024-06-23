@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { type macosWindow } from '../interfaces';
 import { rand, useElementHover, useElementSize } from '@vueuse/core';
 import { UseDraggable as Draggable} from '@vueuse/components';
 
-
+const router = useRouter();
 const headerDrag = ref<HTMLElement | null>(null)
 
 //Get size of parent
@@ -22,8 +23,9 @@ const props = defineProps({
 });
 
 const openURL = (url: string) => {
-  window.open(url, '_blank');
+    router.push(url);
 };
+
 
 </script>
 

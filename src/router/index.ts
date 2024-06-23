@@ -17,7 +17,7 @@ const router = createRouter({
       component: Spotify
     },
     {
-      path: '/SAE%20501',
+      path: '/SAE 501',
       name: 'SAE 501',
       component: ChromeApp
     },
