@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 import { type macosWindow } from '../interfaces';
 import { rand, useElementHover, useElementSize } from '@vueuse/core';
 import { UseDraggable as Draggable} from '@vueuse/components';

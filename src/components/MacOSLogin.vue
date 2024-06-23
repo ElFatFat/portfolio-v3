@@ -32,7 +32,7 @@ function capitalizeFirstLetter(string: string) {
       <p class="macos-login-time">{{ currentTime.hour }}</p>
     </div>
     <div class="macos-login-user">
-      <img src="/src/assets/dog_cursed.jpg" class="user-icon" alt="user" />
+      <img src="/src/assets/nootnoot_terrified_emote.png" class="user-icon" alt="user" />
     </div>
     
   </div>
@@ -42,16 +42,7 @@ function capitalizeFirstLetter(string: string) {
 <style scoped>
 .user-icon{
   border-radius: 50%;
-  animation: rotateImage 5s linear infinite;
   width: clamp(5em, 15vw, 15em);
-}
-@keyframes rotateImage {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 .macos-login{
   user-select: none;

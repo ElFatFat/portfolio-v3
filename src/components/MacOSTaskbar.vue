@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue';
 import { type macosWindow } from '../interfaces';
  
 
@@ -84,6 +83,7 @@ const props = defineProps({
 .macos-icon{
   height: 80%;
   transition: all 0.1s;
+  border-radius: 12px;
 }
 
 .macos-activity{

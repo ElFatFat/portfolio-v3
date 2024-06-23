@@ -119,6 +119,7 @@ const openURL = (url: string) => {
 .wifiIcon, .macos-topbar-app-icon{
   height: 1.3em;
   cursor: pointer;
+  border-radius: 4px;
 }
 .topbar-clickable-text{
   cursor: pointer;

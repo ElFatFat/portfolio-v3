@@ -3,7 +3,7 @@ import MacOSTopbar from './MacOSTopbar.vue';
 import MacOSTaskbar from './MacOSTaskbar.vue';
 import MacOSLoading from './MacOSLoading.vue';
 import MacOSWindowManager from './MacOSWindowManager.vue';
-import { computed, onMounted, type DefineComponent } from 'vue';
+import { computed } from 'vue';
 import { type macosWindow } from '../interfaces';
 import ChromeApp from './windows/ChromeApp.vue';
 import Spotify from './windows/Spotify.vue';
@@ -21,14 +21,14 @@ const activeApp = computed(() => {
 
   const macosWindows = ref<macosWindow[]>([
     {
-      title: "Chrome",
-      iconURL: "/appIcons/chrome.png",
+      title: "SAE 501",
+      iconURL: "/appIcons/jpmeaux.png",
       isMinimized: false,
       isRunning: false,
       // @ts-ignore
       content: ChromeApp,
       size: {
-        minwidth: 300,
+        minwidth: 600,
         maxwidth: 800,
         minheight: 300,
         maxheight: 600,
@@ -36,6 +36,22 @@ const activeApp = computed(() => {
       },
       backgroundColor: '#2f2a85',
       headerTextColor: 'white'
+    },
+    {
+      title: "Spotify",
+      iconURL: "/appIcons/spotify.png",
+      isMinimized: false,
+      isRunning: false,
+      // @ts-ignore
+      content: Spotify,
+      size: {
+        minwidth: 500,
+        maxwidth: 1000,
+        minheight: 100,
+        maxheight: 500,
+        depth: 0
+      },
+      backgroundColor: "#1DB954"
     },
     {
       title: "Discord",
@@ -81,22 +97,6 @@ const activeApp = computed(() => {
         maxheight: 800,
         depth: 0
       }
-    },
-    {
-      title: "Spotify",
-      iconURL: "/appIcons/spotify.png",
-      isMinimized: false,
-      isRunning: false,
-      // @ts-ignore
-      content: Spotify,
-      size: {
-        minwidth: 500,
-        maxwidth: 1000,
-        minheight: 100,
-        maxheight: 500,
-        depth: 0
-      },
-      backgroundColor: "#1DB954"
     },
     {
       title: "Finder",
