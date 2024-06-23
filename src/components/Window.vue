@@ -30,7 +30,7 @@ const openURL = (url: string) => {
 </script>
 
 <template>
-    <Draggable class="macos-window" ref="window" :handle="headerDrag" :prevent-default="true" :initial-value="{ x: rand(screenX*0.1, screenX*0.9), y: rand(screenY*0.1, screenY*0.9) }" :storage-key="macosWindow.title" storage-type="session" :style="{ zIndex: macosWindow.size.depth, minWidth: macosWindow.size.minwidth + 'px', minHeight: macosWindow.size.minheight  + 'px', maxWidth: macosWindow.size.maxwidth + 'px', maxHeight: macosWindow.size.maxheight  + 'px' }" @click="$emit('touchApp', macosWindow.title)" @start="$emit('touchApp', macosWindow.title)">
+    <Draggable class="macos-window" ref="window" :handle="headerDrag" :prevent-default="true" :initial-value="{ x: rand(screenX*0.3, screenX*0.7), y: rand(screenY*0.3, screenY*0.5) }" :storage-key="macosWindow.title" storage-type="session" :style="{ zIndex: macosWindow.size.depth, minWidth: macosWindow.size.minwidth + 'px', minHeight: macosWindow.size.minheight  + 'px', maxWidth: macosWindow.size.maxwidth + 'px', maxHeight: macosWindow.size.maxheight  + 'px' }" @click="$emit('touchApp', macosWindow.title)" @start="$emit('touchApp', macosWindow.title)">
         <div class="macos-window-header" ref="headerDrag" :style="{ backgroundColor: macosWindow.backgroundColor ||  '#b8b8b8' }">
         <div class="macos-window-header-button" ref="hoverableButtons">
             <img src="/windowButtons/close-hover.png" alt="close" v-if="isHovered" @click="$emit('closeApp', macosWindow.title)"/>

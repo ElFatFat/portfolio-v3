@@ -35,4 +35,8 @@ const { isFullscreen, enter, exit, toggle } = useFullscreen(macosscreen)
   border-radius: 0 0 0 0.5rem;
   transition: background-color 0.3s;
 }
+
+main{
+  overflow: hidden;
+}
 </style>

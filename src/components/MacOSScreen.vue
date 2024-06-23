@@ -209,6 +209,8 @@ const activeApp = computed(() => {
 }
 
 .macos-wrapper{
+  max-width: 100vw;
+  max-height: 100dvh;
   height: 100dvh;
   width: 100vw;
   display: flex;
