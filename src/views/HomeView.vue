@@ -12,17 +12,18 @@ const { isFullscreen, enter, exit, toggle } = useFullscreen(macosscreen)
 <template>
   <main ref="macosscreen">
     <MacOSScreen/>
-    <!-- <button @click="toggle" class="fullscreen-button">
+    <button @click="toggle" class="fullscreen-button">
       {{ isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen' }}
-    </button> -->
+    </button>
   </main>
 </template>
 
 <style scoped>
 .fullscreen-button{
   position: fixed;
-  top: 0;
-  right: 0;
+  opacity: 0.1;
+  bottom: 1em;
+  right: 1em;
   padding: 1rem;
   background-color: #000;
   color: #fff;
@@ -32,10 +33,14 @@ const { isFullscreen, enter, exit, toggle } = useFullscreen(macosscreen)
   font-size: 1rem;
   font-weight: 700;
   text-transform: uppercase;
-  border-radius: 0 0 0 0.5rem;
+  border-radius: 0.5em;
   transition: background-color 0.3s;
+  transition: all 0.3s;
 }
-
+.fullscreen-button:hover{
+  opacity: 1;
+  transform: scale(1.1);
+}
 main{
   overflow: hidden;
 }
