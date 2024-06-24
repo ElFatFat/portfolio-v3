@@ -177,7 +177,7 @@ const activeApp = computed(() => {
     <Transition name="login">
       <MacOSLogin v-if="!loggedIn" @login="login"/>
     </Transition>
-    <div class="macos-main" :style="{'background-image': 'url(/wallpapers/01.jpeg)'}">
+    <div class="macos-main" :style="{'background-image': 'url(/wallpapers/01.jpg)'}">
       <MacOSTopbar :macos-active-app="activeApp" @close-app="closeApp" @minimize-app="minimizeApp" @logOut="logOut"/>
       <MacOSWindowManager :macos-window="macosWindows" @close-app="closeApp" @minimize-app="minimizeApp" @touch-app="touchApp"/>
       <MacOSTaskbar :macos-window="macosWindows" @openApp="openApp"/>

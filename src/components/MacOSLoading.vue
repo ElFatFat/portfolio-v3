@@ -6,7 +6,7 @@ const emits = defineEmits(['loaded']);
         "/appIcons/apple.png",
         "/appIcons/chrome.png",
         "/appIcons/spotify.png",
-        "/wallpapers/01.jpeg",
+        "/wallpapers/01.jpg",
         "/windowButtons/close-hover.png",
         "/windowButtons/close-normal.png",
         "/windowButtons/max-hover.png",
